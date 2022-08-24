@@ -1,5 +1,5 @@
 <?php
-    include "./utils.php";
+    include "./utils/index.php";
 ?>
 
 <html>
@@ -49,7 +49,7 @@
 <div class='container '>
 <div class = "row justify-content-center mt-2">
 <div class = "col text-center">
-<h1 class="text-primary m-5">E-BOARD MANAGER</h1>
+<h1 class="text-primary m-5 display-3">E-BOARD MANAGER</h1>
 </div>
 </div>
     <?php
@@ -66,8 +66,17 @@
 		</li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane fade show active" id="elenco" role="tabpanel" aria-labelledby="elenco-tab"><?php include "login.php"?></div>
-			<div class="tab-pane fade" id="code" role="tabpanel" aria-labelledby="code-tab"><?php include "register.php"?></div>
+			<div class="tab-pane fade show active" id="elenco" role="tabpanel" aria-labelledby="elenco-tab"><?php include "view/auth/login.php"?></div>
+			<div class="tab-pane fade" id="code" role="tabpanel" aria-labelledby="code-tab"><?php include "view/auth/register.php"?></div>
 		</div>
+		<script>
+			$.ajax({
+				url: 'app/auth/format.php',
+				type: 'get',
+				success:function(data) {
+					console.log(data);
+				}
+			})
+		</script>
 </body>
 </html>

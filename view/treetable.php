@@ -83,8 +83,11 @@
         </div>
         <div class="header">
             <h1 class="logo" style="margin-block-end: 0px; text-align: center">Database</h1>
-            <div class="d-flex justify-content-between">
-                <a class="btn btn-success ml-3 text-white" data-toggle="modal" data-target="#uploadModal">Upload</a>
+            <div class="d-flex justify-content-between px-3">
+                <?php 
+                session_start();
+                if($_SESSION['role'] != 2) echo '<a class="btn btn-success ml-3 text-white" data-toggle="modal" data-target="#uploadModal">Upload</a>';              
+                ?>
                 <a class="btn btn-info mr-3 text-white" id="download-all">Download</a>
             </div>
         </div>
@@ -187,37 +190,37 @@
                         <div class="modal-body pl-5 pr-5">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width: 300px;"><?php echo $code; ?></span>
+                                    <span class="input-group-text" style="width: 350px;"><?php echo $code; ?></span>
                                 </div>
                                 <input type="file" class="form-control" name="file1" id="file1" placeholder="<?php echo $code; ?>">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width: 300px;"><?php echo $code; ?>_FIRM_PRJ</span>
+                                    <span class="input-group-text" style="width: 350px;"><?php echo $code; ?>_FIRM_PRJ</span>
                                 </div>
                                 <input type="file" class="form-control" name="file2" id="file2" placeholder="<?php echo $code; ?>_FIRM_PRJ">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width: 300px;"><?php echo $code; ?>_FIRM_TP</span>
+                                    <span class="input-group-text" style="width: 350px;"><?php echo $code; ?>_FIRM_TP</span>
                                 </div>
                                 <input type="file" class="form-control" name="file3" id="file3" placeholder="<?php echo $code; ?>_FIRM_TP">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width: 300px;"><?php echo $code; ?>_GERBER</span>
+                                    <span class="input-group-text" style="width: 350px;"><?php echo $code; ?>_GERBER</span>
                                 </div>
                                 <input type="file" class="form-control" name="file4" id="file4" placeholder="<?php echo $code; ?>_FIRM_GERBER">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width: 300px;"><?php echo $code; ?>_HARD_PRJ</span>
+                                    <span class="input-group-text" style="width: 350px;"><?php echo $code; ?>_HARD_PRJ</span>
                                 </div>
                                 <input type="file" class="form-control" name="file5" id="file5" placeholder="<?php echo $code; ?>_HARD_PRJ">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="width: 300px;"><?php echo $code; ?>_PICTURE</span>
+                                    <span class="input-group-text" style="width: 350px;"><?php echo $code; ?>_PICTURE</span>
                                 </div>
                                 <input type="file" class="form-control" name="file6" id="file6" placeholder="<?php echo $code; ?>_PICTURE">
                             </div>

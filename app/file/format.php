@@ -6,7 +6,6 @@
             unlink($file); // delete file
         }
     }
-
-    echo "zip file deleted!"
+    echo "zip file deleted!";
 
 ?>

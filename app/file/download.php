@@ -1,6 +1,6 @@
 <?php 
     $code = $_POST['code'];
-    $rootPath = '../../public/'.$code;
+    $rootPath = '../../public/'.$code.'/';
     
     $zip = new ZipArchive();
     if(!is_dir('../../public/download')) {
@@ -9,36 +9,42 @@
 
     
     $archive_name = '../../public/download/'.$code.'_ALLFILES.zip'; // name of zip file
-    $archive_folder = $rootPath; // the folder which you archivate
 
     $zip = new ZipArchive;
-    if ($zip -> open($archive_name, ZipArchive::CREATE) === TRUE)
-    {
-        $dir = $rootPath.'/';
+
+    if ($zip->open($archive_name, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
+        addFolderToZip($rootPath, $zip);
+    }
+
+    function addFolderToZip($dir, $zipArchive){
+        if (is_dir($dir)) {
+            if ($dh = opendir($dir)) {
     
-        $dirs = array($dir);
-        while (count($dirs))
-        {
-            $dir = current($dirs);
-            $zip -> addEmptyDir($dir);
-        
-            $dh = opendir($dir);
-            while($file = readdir($dh))
-            {
-                if ($file != '.' && $file != '..')
-                {
-                    if (is_file($file))
-                        $zip -> addFile($dir.$file, $dir.$file);
-                    elseif (is_dir($file))
-                        $dirs[] = $dir.$file."/";
+                //Add the directory
+                $zipArchive->addEmptyDir($dir);
+               
+                // Loop through all the files
+                while (($file = readdir($dh)) !== false) {
+               
+                    //If it's a folder, run the function again!
+                    if(!is_file($dir . $file)){
+                        // Skip parent and root directories
+                        if( ($file !== ".") && ($file !== "..")){
+                            addFolderToZip($dir . $file . "/", $zipArchive);
+                        }
+                       
+                    }else{
+                        // Add the files
+                        $zipArchive->addFile($dir . $file);
+                       
+                    }
                 }
             }
-            closedir($dh);
-            array_shift($dirs);
         }
     }
 
     // show directories having files
+
     // if($zip->open('../../public/download/'.$code.'_ALLFILES.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
     //     listFolderFiles($rootPath, $rootPath, $zip);
     // } else {
@@ -63,7 +69,6 @@
     // }
 
     $zip->close();
-
     echo $code;
 
 ?>

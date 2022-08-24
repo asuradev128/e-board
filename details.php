@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //divido per 1000 una stringa numerica e la formatto -- Es. 13 = 0.013	
 function pad($number, $min_digits){
 		return strrev(
@@ -55,9 +55,12 @@ echo '
 			<i class="fas fa-euro-sign" id="euro"></i>
 			</span>
 </div>
-<div class="tools">
-    <button class="btn btn-primary m-3" data-toggle="modal" data-target="#addModal">Add Component</button>
-</div>
+<div class="tools">';
+
+if($_SESSION['role'] != 2) echo '<button class="btn btn-primary m-3" data-toggle="modal" data-target="#addModal">Add Component</button>';
+else echo '<br>';
+    
+echo '</div>
 <table id="dxfLista" class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto; ">
 <thead>
 	<tr>
